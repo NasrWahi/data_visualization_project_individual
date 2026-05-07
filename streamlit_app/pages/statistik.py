@@ -1,5 +1,5 @@
 # ── pages/statistik.py ────────────────────────────────────────────────────────
-# Statistiksidan
+# Statistiksidan 
 
 import streamlit as st
 
