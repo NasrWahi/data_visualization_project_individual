@@ -3,7 +3,11 @@
 
 import streamlit as st
 import pandas as pd
-from utils.helpers import load_all, load_visningar, format_sek
+from utils.helpers import (
+    load_all, load_visningar, format_sek,
+    get_anvandare, is_inloggad,
+    load_sparade_for_user, spara_bostad, ta_bort_sparad, is_sparad,
+)
 from utils.constants import COL_SPARAD
 
 _MANAD = ["", "JAN", "FEB", "MAR", "APR", "MAJ", "JUN",
@@ -42,36 +46,46 @@ _BILDER = {
 }
 
 _FALLBACK = [
-    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600",
+    "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600",
 ]
 
 
-def _bild_url(typ: str, bostad_id: int) -> str:
-    """Returnerar en bild-URL matchad till bostadstyp, roterar baserat på id."""
+def _bild_url(typ: str, index: int) -> str:
+    """Returnerar en bild-URL matchad till bostadstyp baserat på position."""
     lista = _BILDER.get(str(typ).lower(), _FALLBACK)
-    return lista[(bostad_id * 13) % len(lista)]
+    return lista[index % len(lista)]
 
 
 def render_sparade() -> None:
-    """Detta visar bostäder där sparad == 1 i sidopanelens - Mina sparade-sektion."""
-    df = load_all()
-    sparade = df[df[COL_SPARAD] == 1].head(3)
-
+    """Visar bostäder sparade av inloggad användare."""
     st.markdown("### Mina sparade")
 
-    if sparade.empty:
+    if not is_inloggad():
+        st.caption("Logga in för att spara bostäder.")
+        return
+
+    anvandare = get_anvandare()
+    sparade_ids = load_sparade_for_user(anvandare)
+
+    if not sparade_ids:
         st.caption("Du har inte sparat några bostäder ännu.")
         return
 
-    for _, rad in sparade.iterrows():
+    df = load_all()
+    sparade = df[df["id"].isin(sparade_ids)].head(3)
+
+    for i, (_, rad) in enumerate(sparade.iterrows()):
         with st.container(border=True):
-            st.image(_bild_url(rad["typ"], int(rad["id"])), use_container_width=True)
+            st.image(_bild_url(rad["typ"], i), use_container_width=True)
             st.markdown(f"**{format_sek(rad['pris'])}**")
             st.caption(f"{rad['adress']}, {rad['område']}")
             c1, c2, c3 = st.columns(3)
             c1.caption(f"{int(rad['rum'])} rum")
             c2.caption(f"{int(rad['boyta'])} m2")
             c3.caption(str(rad["typ"]).capitalize())
+            if st.button("Ta bort", key=f"tabort_{rad['id']}", use_container_width=True):
+                ta_bort_sparad(anvandare, int(rad["id"]))
+                st.rerun()
 
 
 def render_visningar() -> None:
@@ -110,9 +124,11 @@ def render_rekommenderade(df: pd.DataFrame) -> None:
         st.info("Inga bostäder matchar ditt filter.")
         return
 
-    top = df.sort_values("pris_per_kvm").head(5)
+    anvandare  = get_anvandare() if is_inloggad() else None
+    top        = df.sort_values("pris_per_kvm").head(5)
 
     for i, (_, rad) in enumerate(top.iterrows()):
+        bostad_id = int(rad["id"])
         with st.container(border=True):
             col_bild, col_info = st.columns([1, 2])
 
@@ -127,4 +143,14 @@ def render_rekommenderade(df: pd.DataFrame) -> None:
                 c2.caption(f"{int(rad['boyta'])} m2")
                 c3.caption(str(rad["typ"]).capitalize())
                 if rad.get("avgift") and rad["avgift"] > 0:
-                    st.caption(f"{int(rad['avgift']):,} kr/mån".replace(",", " "))
+                    st.caption(f"{int(rad['avgift']):,} kr/man".replace(",", " "))
+
+                if anvandare:
+                    sparad = is_sparad(anvandare, bostad_id)
+                    label  = "Sparad" if sparad else "Spara"
+                    if st.button(label, key=f"spara_{bostad_id}", use_container_width=True):
+                        if sparad:
+                            ta_bort_sparad(anvandare, bostad_id)
+                        else:
+                            spara_bostad(anvandare, bostad_id)
+                        st.rerun()
