@@ -13,6 +13,7 @@ ETL_DIR         = ROOT_DIR / "ETL_Pipline"
 ASSETS_DIR      = Path(__file__).parent.parent / "assets"
 ICONS_DIR       = ASSETS_DIR / "icons"
 IMAGES_DIR      = ASSETS_DIR / "images"
+STYLES_PATH     = ASSETS_DIR / "style"
 SRC_DATA_DIR    = ROOT_DIR / "src" / "data"
  
 # ── CSV-filer ─────────────────────────────────────────────────────────────────
