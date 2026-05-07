@@ -6,6 +6,7 @@ import os
 from dotenv import load_dotenv
  
 load_dotenv()
+print("API-nyckel:", os.getenv("GOOGLE_MAPS_API_KEY"))
  
 # ── Sökvägar ──────────────────────────────────────────────────────────────────
 ROOT_DIR        = Path(__file__).parent.parent.parent  # repo-roten
