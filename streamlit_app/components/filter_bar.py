@@ -3,6 +3,7 @@
 # Ska returnera ett filtrerat DataFrame och valt område.
 # DRY: all filtreringslogik på ett ställe.
 
+# ── components/filter_bar.py ──────────────────────────────────────────────────
 import streamlit as st
 from utils.helpers import load_all, get_omraden
 
