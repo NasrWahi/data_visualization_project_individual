@@ -29,7 +29,7 @@ def show() -> None:
         return
 
     st.markdown("## Statistik")
-    st.markdown("Översikt over bostadsmarknaden baserat på insamlad data.")
+    st.markdown("Översikt över bostadsmarknaden baserat på insamlad data.")
 
     render_kpis(df)
     st.markdown("---")
