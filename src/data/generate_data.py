@@ -107,6 +107,7 @@ def generera_bostad(id):
     dagar_sen = random.randint(0, 365)
     created_at = (datetime.now() - timedelta(days=dagar_sen)).strftime("%Y-%m-%d")
 
+
     if upplåtelseform == "hyra":
         pris = int((boyta * 150) * random.uniform(0.8, 1.2))
         avgift = 0

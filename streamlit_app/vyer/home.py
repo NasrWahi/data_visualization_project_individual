@@ -36,7 +36,7 @@ def show():
 """, unsafe_allow_html=True)
 
     # ── Streamlit-innehåll ────────────────────────────────────────────────────
-    st.markdown("<br><br><br><br><br>", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
