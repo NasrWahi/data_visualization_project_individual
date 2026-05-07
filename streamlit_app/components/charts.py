@@ -1,7 +1,4 @@
-# ── components/charts.py ──────────────────────────────────────────────────────
-# Diagrammen för RightHome-appen bör samlas här.
-# Importera från pages.
-
+# components/charts.py
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
@@ -41,7 +38,7 @@ def render_prisdiagram(df: pd.DataFrame) -> None:
         x="snittpris",
         y="område",
         orientation="h",
-        color_discrete_sequence=[COLOR_CORAL],
+        color_discrete_sequence=["#93CEDE"],
         text_auto=".2s",
         labels={"snittpris": "Snittpris (kr)", "område": ""},
     )
@@ -82,7 +79,7 @@ def render_snittpris_per_typ(df: pd.DataFrame) -> None:
         y="snittpris",
         text_auto=".2s",
         color="typ",
-        color_discrete_sequence=[COLOR_CORAL, COLOR_BROWN, COLOR_SAND, COLOR_MUTED],
+        color_discrete_sequence=["#93CEDE", "#F9A890", "#FDD2B1", "#D4C8B7"],
         labels={"typ": "Bostadstyp", "snittpris": "Snittpris (kr)"},
     )
     fig.update_layout(
@@ -113,7 +110,7 @@ def render_upplatelseform(df: pd.DataFrame) -> None:
         uppl_df,
         names="upplåtelseform",
         values="antal",
-        color_discrete_sequence=[COLOR_CORAL, COLOR_SAND, COLOR_BROWN, COLOR_MUTED],
+        color_discrete_sequence=["#93CEDE", "#F9A890", "#FDD2B1", "#D4C8B7"],
         hole=0.4,
     )
     fig.update_layout(
@@ -146,7 +143,7 @@ def render_pris_per_kvm(df: pd.DataFrame) -> None:
         x="område",
         y="snitt_kvm_pris",
         markers=True,
-        color_discrete_sequence=[COLOR_BROWN],
+        color_discrete_sequence=["#93CEDE"],
         labels={"område": "Område", "snitt_kvm_pris": "Pris/kvm (kr)"},
     )
     fig.update_layout(
@@ -180,7 +177,7 @@ def render_rumsfordelning(df: pd.DataFrame) -> None:
         x="rum",
         y="antal",
         text_auto=True,
-        color_discrete_sequence=[COLOR_CORAL],
+        color_discrete_sequence=["#93CEDE"],
         labels={"rum": "Antal rum", "antal": "Antal bostäder"},
     )
     fig.update_layout(
@@ -215,7 +212,7 @@ def render_snittpris_per_stad(df: pd.DataFrame) -> None:
         x="stad",
         y="snittpris",
         text_auto=".2s",
-        color_discrete_sequence=[COLOR_BROWN],
+        color_discrete_sequence=["#93CEDE"],
         labels={"stad": "Stad", "snittpris": "Snittpris (kr)"},
         hover_data={"antal": True},
     )
@@ -249,7 +246,7 @@ def render_visningar_per_dag(visningar: pd.DataFrame) -> None:
         vis_df,
         x="datum",
         y="antal_visningar",
-        color_discrete_sequence=[COLOR_CORAL],
+        color_discrete_sequence=["#93CEDE"],
         labels={"datum": "Datum", "antal_visningar": "Antal visningar"},
         text_auto=True,
     )
