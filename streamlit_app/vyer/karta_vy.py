@@ -3,6 +3,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import base64
 from components.filter_bar import render_filter_bar
+from components.objekt_lista import render_sparade, render_visningar, render_rekommenderade
 from utils.constants import GOOGLE_MAPS_KEY, ICONS_DIR, POI_OPTIONS as POI_CONST
 
 POI_COLORS = {
@@ -256,6 +257,7 @@ function buildPowerBIPopup(b, narmasteNamn) {
     html += '</div></div>';
     return html;
 }
+
 function visaRutt(val) {
     if (!valdBostad || !valdPOI) return;
     
@@ -434,8 +436,14 @@ def show():
     html = build_map_with_poi_html(df_filtrerad, GOOGLE_MAPS_KEY, aktiva)
     components.html(html, height=650, scrolling=False)
 
+    st.markdown("---")
 
+    col_main, col_side = st.columns([2.5, 1], gap="large")
 
+    with col_main:
+        render_rekommenderade(df_filtrerad)
 
-
-
+    with col_side:
+        render_sparade()
+        st.markdown("---")
+        render_visningar()
