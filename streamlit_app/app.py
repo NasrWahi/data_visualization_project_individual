@@ -2,7 +2,7 @@ import streamlit as st
 from utils.constants import APP_TITLE, APP_ICON, LOGO_PATH
 from vyer.home import show as show_home
 from vyer.karta_vy import show as show_karta
-from vyer.statistik import show as show_statistik
+from vyer.statistik_vy import show as show_statistik
 
 st.set_page_config(
     page_title=APP_TITLE,
