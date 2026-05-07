@@ -130,8 +130,7 @@ function setBtnActive(btn, on) {
 }
 
 function togglePOI(btn, typ) {
-    // Spara vilken typ som är aktiv för rutt-sökningen
-    valdKategoriTyp = typ; 
+    valdKategoriTyp = typ;
 
     if (aktivaPOI.has(typ)) {
         aktivaPOI.delete(typ);
@@ -140,22 +139,28 @@ function togglePOI(btn, typ) {
             placeMarkers[typ].forEach(function(m) { m.setMap(null); });
             delete placeMarkers[typ];
         }
+
+        // Rensa rutten om inga tjänster är aktiva
+        if (aktivaPOI.size === 0) {
+            if (directionsRenderer) {
+                directionsRenderer.setMap(null);
+                directionsRenderer.setDirections({routes: []});
+            }
+            if (infoWindow) infoWindow.close();
+            valdPOI = null;
+            var clearBtn = document.getElementById("clearRoute");
+            if (clearBtn) clearBtn.style.display = "none";
+        }
     } else {
-        // Rensa andra aktiva om du bara vill se en åt gången (valfritt)
-        // aktivaPOI.clear(); 
-        
         aktivaPOI.add(typ);
         setBtnActive(btn, true);
         visaPOI(typ);
-        
-        // Om vi redan har en vald bostad, uppdatera rutt och popup direkt!
-        if (valdBostad) {
-            // Trigga ett "fejkat" klick på den valda bostaden för att uppdatera info
-            triggerBostadUpdate(); 
-        }
-    }
-}
 
+        if (valdBostad) {
+            triggerBostadUpdate();
+        }
+    } 
+}
 function triggerBostadUpdate() {
     // Hitta markören för den valda bostaden och kör dess klick-logik igen
     bostadMarkers.forEach(function(m) {
@@ -260,17 +265,26 @@ function buildPowerBIPopup(b, narmasteNamn) {
 
 function visaRutt(val) {
     if (!valdBostad || !valdPOI) return;
-    
-    // Fixat: Översätt siffra till Googles TravelMode
+
     var mode = "WALKING";
     if (val === 2) mode = "TRANSIT";
     if (val === 3) mode = "DRIVING";
-    if (typeof val === "string") mode = val; // Om text skickas direkt
+    if (typeof val === "string") mode = val;
 
-    if (directionsRenderer) directionsRenderer.setMap(null);
+    // Rensa gamla renderer UTAN att skapa en ny ännu
+    if (directionsRenderer) {
+        directionsRenderer.setMap(null);
+        directionsRenderer.setDirections({routes: []});
+    }
+
+    // Skapa ny renderer EN gång
     directionsRenderer = new google.maps.DirectionsRenderer({
         suppressMarkers: true,
-        polylineOptions: { strokeColor: '#E8735A', strokeWeight: 5, strokeOpacity: 0.8 }
+        polylineOptions: {
+            strokeColor: '#E8735A',
+            strokeWeight: 5,
+            strokeOpacity: 0.8
+        }
     });
     directionsRenderer.setMap(map);
 
@@ -281,6 +295,8 @@ function visaRutt(val) {
     }, function(result, status) {
         if (status === 'OK') {
             directionsRenderer.setDirections(result);
+            var btn = document.getElementById("clearRoute");
+            if (btn) btn.style.display = "block";
         }
     });
 }
