@@ -12,6 +12,16 @@ from utils.constants import (
     COL_OMRADE, COL_KOMMUN_BEFOLKNING,
 )
 
+# ── Fil-läsning ───────────────────────────────────────────────────────────────
+def read_textfile(path: Path) -> str:
+    """Läser textfil och returnerar innehåll som sträng."""
+    with open(path, encoding="utf-8") as f:
+        return f.read()
+
+def read_css(path: Path) -> None:
+    """Laddar en CSS-fil och injicerar den i Streamlit via st.markdown."""
+    css = read_textfile(path)
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
 # ── Fil-läsning ───────────────────────────────────────────────────────────────
 
