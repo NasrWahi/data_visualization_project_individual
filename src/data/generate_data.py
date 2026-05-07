@@ -142,7 +142,7 @@ def generera_bostad(id):
         "created_at": created_at
     }
 
-bostäder = [generera_bostad(i) for i in range(1, 1001)]
+bostäder = [generera_bostad(i) for i in range(1, 1100)]
 
 import os
 os.makedirs("src/data", exist_ok=True)

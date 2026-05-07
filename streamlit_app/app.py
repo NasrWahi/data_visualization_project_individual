@@ -1,5 +1,6 @@
 import streamlit as st
 from utils.constants import APP_TITLE, APP_ICON, LOGO_PATH
+from utils.helpers import is_inloggad, get_anvandare, logga_ut
 from vyer.home import show as show_home
 from vyer.karta_vy import show as show_karta
 from vyer.statistik_vy import show as show_statistik
@@ -161,6 +162,10 @@ with st.sidebar:
 
     st.markdown("---")
 
+    if is_inloggad():
+        st.caption(f"Inloggad som: **{get_anvandare()}**")
+        st.markdown("---")
+
     if st.button("Home", use_container_width=True):
         st.session_state["sida"] = "home"
         st.rerun()
@@ -172,6 +177,13 @@ with st.sidebar:
     if st.button("Statistik", use_container_width=True):
         st.session_state["sida"] = "statistik"
         st.rerun()
+
+    if is_inloggad():
+        st.markdown("---")
+        if st.button("Logga ut", use_container_width=True):
+            logga_ut()
+            st.session_state["sida"] = "home"
+            st.rerun()
 
 # ROUTING
 if st.session_state["sida"] == "home":
