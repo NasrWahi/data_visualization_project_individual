@@ -4,14 +4,7 @@ version = "0.1.0"
 description = "RightHome – Streamlit-dashboard för bostadsdata"
 readme = "README.md"
 requires-python = ">=3.11"
-dependencies = [
-    "streamlit>=1.43.0",
-    "pandas>=3.0.2",
-    "plotly>=6.6.0",
-    "duckdb>=1.2.0",
-    "python-dotenv>=1.1.0",
-    
-]
+dependencies = []
 
 [project.scripts]
 righthome = "streamlit_app.app:main"
