@@ -5,18 +5,20 @@ description = "RightHome – Streamlit-dashboard för bostadsdata"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "streamlit>=1.43.0",
-    "pandas>=3.0.2",
-    "plotly>=6.6.0",
-    "duckdb>=1.2.0",
-    "python-dotenv>=1.1.0",
     "jupyter>=1.1.1",
-    "python-dotenv"
+    "duckdb==1.4.1",
+    "matplotlib==3.10.7",
+    "numpy>=2.0.0",
+    "pandas==2.3.3",
+    "plotly==6.6.0",
+    "python-dotenv==1.2.1",
+    "requests==2.32.5",
+    "seaborn==0.13.2",
+    "streamlit==1.55.0",
+    "streamlit-aggrid==1.2.1.post2",
+    "streamlit-option-menu==0.4.0",
 ]
 
-[project.scripts]
-righthome = "streamlit_app.app:main"
-
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+# [build-system]
+# requires = ["hatchling"]
+# build-backend = "hatchling.build"
