@@ -1,4 +1,4 @@
-duckdb==1.4.1
+duckdb
 matplotlib==3.10.7
 numpy>=2.0.0
 pandas==2.3.3
