@@ -3,7 +3,7 @@ name = "ux25-de25-projekt-group3"
 version = "0.1.0"
 description = "RightHome – Streamlit-dashboard för bostadsdata"
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.11"
 dependencies = [
     "streamlit>=1.43.0",
     "pandas>=3.0.2",
