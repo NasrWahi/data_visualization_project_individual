@@ -61,7 +61,7 @@ def render_filter_bar() -> tuple:
                 pris_step    = 100_000
 
             pris_max = st.slider(
-                "Max pris (kr)",
+                "Din budget (kr)",
                 min_value=pris_min,
                 max_value=pris_max_val,
                 value=pris_max_val,
