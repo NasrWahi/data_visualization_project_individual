@@ -3,8 +3,7 @@
 *.env
 
 # Rådata — kan vara stor och känslig
-data/raw/
-data/processed/
+
 
 # Python
 __pycache__/
