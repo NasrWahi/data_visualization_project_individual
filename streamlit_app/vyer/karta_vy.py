@@ -101,6 +101,8 @@ function initMap() {
         polylineOptions: { strokeWeight: 4, strokeOpacity: 0.8 }
     });
     directionsRenderer.setMap(map);
+    valdBostad = null;  
+    valdPOI    = null;  
 
     addBostadMarkers();
 
@@ -185,7 +187,14 @@ function addBostadMarkers() {
 
         marker.addListener("click", function() {
             valdBostad = { lat: b.lat, lng: b.lng };
-            
+
+            // Ingen tjänst vald — visa enkel popup med meddelande
+            if (aktivaPOI.size === 0) {
+                infoWindow.setContent(buildPopup(b));
+                infoWindow.open(map, marker);
+                return;
+            }
+
             var req = {
                 location: valdBostad,
                 rankBy: google.maps.places.RankBy.DISTANCE,
@@ -194,21 +203,21 @@ function addBostadMarkers() {
 
             placesService.nearbySearch(req, function(results, status) {
                 if (status === "OK" && results.length > 0) {
-                    var narmaste = results[0]; // Fixat: Hämta första träffen
+                    var narmaste = results[0];
                     valdPOI = narmaste.geometry.location;
                     infoWindow.setContent(buildPowerBIPopup(b, narmaste.name));
                     infoWindow.open(map, marker);
-                    visaRutt(1); // Starta med gångväg
+                    visaRutt(1);
                 } else {
                     infoWindow.setContent(buildPopup(b));
                     infoWindow.open(map, marker);
                 }
             });
         });
-        bostadMarkers.push(marker);
-    });
-}
 
+        bostadMarkers.push(marker);  // Spara referensen till markören så vi kan uppdatera den senare
+    });                               
+}                                      
 
 // Fixad för att undvika HTML-syntaxfel
 function transportKnappar() {
