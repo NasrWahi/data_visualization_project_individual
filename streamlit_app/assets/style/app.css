@@ -1,6 +1,133 @@
-/* style/app.css - referens stil, kan ändras på förfrågan */
+/* Imported from app.py to keep the view files looking clean */
 
-/* KPI-kort: beige bakgrund med brun kantlinje */
+/* Typography */
+html, body, [class*="css"] {
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* Hide Streamlit top bar and remove space */
+#MainMenu { visibility: hidden; }
+footer { visibility: hidden; }
+header[data-testid="stHeader"] {
+    visibility: hidden;
+    height: 0 !important;
+    min-height: 0 !important;
+    padding: 0 !important;
+}
+
+/* Remove padding left by the header */
+.appview-container > .main > .block-container {
+    padding-top: 1rem !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    padding-bottom: 1rem !important;
+}
+
+/* To force light background on main */
+.appview-container,
+.main {
+    background-color: #FDFAF6 !important;
+}
+
+/* Selectbox */
+.stSelectbox > div > div {
+    background-color: white !important;
+    color: #1a1a1a !important;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #F5EDE0 !important;
+    border-right: 1px solid #E8D5BB !important;
+    width: 14rem !important;
+    min-width: 14rem !important;
+    transform: translateX(0) !important;
+    visibility: visible !important;
+}
+
+/* Hide sidebar collapse button, visible sidebar */
+[data-testid="stSidebarCollapseButton"] {
+    display: none !important;
+}
+
+/* Sidebar buttons */
+section[data-testid="stSidebar"] .stButton button {
+    background: white !important;
+    border: 1px solid #E8D5BB !important;
+    border-radius: 10px !important;
+    color: #6B4C3B !important;
+    font-weight: 500 !important;
+    margin-bottom: 0.4rem !important;
+    width: 100% !important;
+}
+
+section[data-testid="stSidebar"] .stButton button:hover {
+    background: #C97B5A !important;
+    color: white !important;
+    border-color: #C97B5A !important;
+}
+
+/* Center logo in sidebar */
+section[data-testid="stSidebar"] img {
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+/* Multiselect - visible options */
+.stMultiSelect [data-baseweb="tag"] {
+    background-color: #C97B5A !important;
+    color: white !important;
+}
+
+.stMultiSelect [data-baseweb="select"] > div {
+    background-color: white !important;
+    border: 1px solid #E8D5BB !important;
+    color: #1a1a1a !important;
+}
+
+/* Filter selectbox */
+.stSelectbox [data-baseweb="select"] > div {
+    background-color: white !important;
+    border: 1px solid #E8D5BB !important;
+    color: #1a1a1a !important;
+}
+
+/* Dropdown list */
+[data-baseweb="popover"] {
+    background-color: white !important;
+    color: #1a1a1a !important;
+}
+
+[data-baseweb="menu"] {
+    background-color: white !important;
+}
+
+[data-baseweb="option"] {
+    background-color: white !important;
+    color: #1a1a1a !important;
+}
+
+[data-baseweb="option"]:hover {
+    background-color: #F5EDE0 !important;
+}
+
+/* POI icon containers */
+section.main div[data-testid="column"] > div > div > div > div:has(button) {
+    display: none !important;
+    height: 0px !important;
+    min-height: 0px !important;
+    margin: 0px !important;
+    padding: 0px !important;
+}
+
+/* Keep iframe icons clickable */
+iframe {
+    display: block !important;
+    margin-bottom: 10px !important;
+    border: none !important;
+}
+
+/* KPI cards */
 [data-testid="stMetric"] {
     background-color: #F5EDE0;
     border-radius: 14px;
@@ -8,9 +135,9 @@
     border: 1px solid #E8D5BB;
 }
 
-/* Rubriker: mörk brun / mellanbrun */
+/* Headings */
 h1, h2 { color: #2C1A0E; }
 h3, h4 { color: #6B4C3B; }
 
-/* Divider: samma kantlinje som KPI-korten */
+/* Divider */
 hr { border-color: #E8D5BB; }
