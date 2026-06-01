@@ -1,0 +1,15 @@
+/* Background image, because of Python, it depends
+   on the base64-encoded entry_vy.png file. */
+
+[data-testid="stMain"] {
+    background-image: url('__BG_IMAGE__');
+    background-size: cover;
+    background-position: center;
+}
+
+[data-testid="stMain"] .stButton button {
+    background-color: #C97B5A !important;
+    border: none !important;
+    color: white !important;
+    border-radius: 10px !important;
+}
