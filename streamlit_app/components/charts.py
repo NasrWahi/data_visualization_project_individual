@@ -1,4 +1,5 @@
-# components/charts.py
+# Chart components
+
 import streamlit as st
 import plotly.express as px
 import plotly.graph_objects as go
@@ -7,16 +8,16 @@ import pandas as pd
 from utils.constants import COLOR_CORAL, COLOR_SAND, COLOR_BROWN, COLOR_MUTED
 
 
-# ── Hjälpfunktion ─────────────────────────────────────────────────────────────
+# ── Helper ──────────────────────────────────────────────────────────────
 
 def _tom_df(meddelande: str) -> None:
     st.info(meddelande)
 
 
-# ── Karta-vy diagram ──────────────────────────────────────────────────────────
+# ── Map view charts ───────────────────────────────────────────────────────────
 
 def render_prisdiagram(df: pd.DataFrame) -> None:
-    """Bar chart: snittpris per område (topp 15)."""
+    """Bar chart: average price per area (top 15)."""
     st.markdown("#### Snittpris per område")
 
     pris_df = duckdb.sql("""
@@ -54,10 +55,10 @@ def render_prisdiagram(df: pd.DataFrame) -> None:
     st.plotly_chart(fig, use_container_width=True)
 
 
-# ── Statistik-diagram ─────────────────────────────────────────────────────────
+# ── Statistics charts ──────────────────────────────────────────────────────────
 
 def render_snittpris_per_typ(df: pd.DataFrame) -> None:
-    """Bar chart: snittpris per bostadstyp."""
+    """Bar chart: average price by listing type."""
     st.markdown("#### Snittpris per bostadstyp")
 
     typ_df = duckdb.sql("""
@@ -92,7 +93,7 @@ def render_snittpris_per_typ(df: pd.DataFrame) -> None:
 
 
 def render_upplatelseform(df: pd.DataFrame) -> None:
-    """Donut chart: fördelning upplåtelseform."""
+    """Donut chart: distribution of tenure types."""
     st.markdown("#### Fördelning upplåtelseform")
 
     uppl_df = duckdb.sql("""
@@ -121,7 +122,7 @@ def render_upplatelseform(df: pd.DataFrame) -> None:
 
 
 def render_pris_per_kvm(df: pd.DataFrame) -> None:
-    """Linjediagram: snittpris per kvm för topp 15 områden."""
+    """Line chart: average price per sqm for top 15 areas."""
     st.markdown("#### Snittpris per kvm — topp 15 områden")
 
     kvm_df = duckdb.sql("""
@@ -158,7 +159,7 @@ def render_pris_per_kvm(df: pd.DataFrame) -> None:
 
 
 def render_rumsfordelning(df: pd.DataFrame) -> None:
-    """Bar chart: antal bostäder per rumsantal."""
+    """Bar chart: listing count by number of rooms."""
     st.markdown("#### Antal bostäder per rumsantal")
 
     rum_df = duckdb.sql("""
@@ -190,7 +191,7 @@ def render_rumsfordelning(df: pd.DataFrame) -> None:
 
 
 def render_snittpris_per_stad(df: pd.DataFrame) -> None:
-    """Bar chart: snittpris per stad."""
+    """Bar chart: average price by city."""
     st.markdown("#### Snittpris per stad")
 
     stad_df = duckdb.sql("""
@@ -226,7 +227,7 @@ def render_snittpris_per_stad(df: pd.DataFrame) -> None:
 
 
 def render_visningar_per_dag(visningar: pd.DataFrame) -> None:
-    """Bar chart: antal visningar per datum."""
+    """Bar chart: number of viewings per date."""
     st.markdown("#### Visningar per dag")
 
     vis_df = duckdb.sql("""

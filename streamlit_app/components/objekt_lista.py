@@ -1,5 +1,5 @@
-# ── components/objekt_lista.py ────────────────────────────────────────────────
-# Tre delfunktioner som kommer att matcha UX:arnas sidopanel och rekommenderade lista design
+# Object listing components
+# Three sub-functions that match the UX sidebar and recommended-listings design
 
 import streamlit as st
 import pandas as pd
@@ -13,8 +13,8 @@ from utils.constants import COL_SPARAD
 _MANAD = ["", "JAN", "FEB", "MAR", "APR", "MAJ", "JUN",
           "JUL", "AUG", "SEP", "OKT", "NOV", "DEC"]
 
-# Bilder kategoriserade per bostadstyp
-# Unsplash-URL:er som fallback, genererad med hjälp av LLMs
+# Image URLs grouped by listing type
+# Unsplash URLs are used as fallback
 _BILDER = {
     "lägenhet": [
         "https://www.bosthlm.se/image/resize/1920/0/images03/192/400128/1347761/highres/12305821.jpg",
@@ -51,13 +51,13 @@ _FALLBACK = [
 
 
 def _bild_url(typ: str, index: int) -> str:
-    """Returnerar en bild-URL matchad till bostadstyp baserat på position."""
+    """Return an image URL matching the listing type, indexed by position."""
     lista = _BILDER.get(str(typ).lower(), _FALLBACK)
     return lista[index % len(lista)]
 
 
 def render_sparade() -> None:
-    """Visar bostäder sparade av inloggad användare."""
+    """Show listings saved by the logged-in user."""
     st.markdown("### Mina sparade")
 
     if not is_inloggad():
@@ -89,7 +89,7 @@ def render_sparade() -> None:
 
 
 def render_visningar() -> None:
-    """Visar kommande visningar från visningar.csv."""
+    """Show upcoming viewings from visningar.csv."""
     vis = load_visningar()
 
     st.markdown("### Kommande visningar")
@@ -115,8 +115,8 @@ def render_visningar() -> None:
 
 def render_rekommenderade(df: pd.DataFrame) -> None:
     """
-    Visar upp till 5 rekommenderade bostäder med bild matchad till bostadstyp.
-    Sorterar, lägst pris per kvm, för "bäst värde".
+    Show up to 5 recommended listings with an image matched to the listing type.
+    Sorted by lowest price per 'kvm' as a "best value" proxy.
     """
     st.markdown("### Rekommenderade för dig")
 
