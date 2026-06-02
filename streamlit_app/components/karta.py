@@ -1,11 +1,13 @@
-# ── components/karta.py ───────────────────────────────────────────────────────
+# EXAMPLE: Google Maps HTML builder for Streamlit app
+# karta.py - TESTING FILE only
+
 import json
 
 
 def build_map_html(df, api_key: str, poi_types=None) -> str:
     """Bygger Google Maps HTML. poi_types kan vara str eller lista."""
 
-    # Hantera både gammal (str) och ny (lista) input
+    # Handle both old (str) and new (list) input
     if poi_types is None:
         poi_types = []
     elif isinstance(poi_types, str):

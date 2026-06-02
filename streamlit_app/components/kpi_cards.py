@@ -1,5 +1,4 @@
-# ── components/kpi_cards.py ───────────────────────────────────────────────────
-# KPI-kort som kommer att visas överst på statistiksidan.
+# KPI cards shown at the top of the statistics view.
 
 import streamlit as st
 import duckdb
@@ -9,14 +8,14 @@ from utils.helpers import format_sek, format_antal
 
 def render_kpis(df: pd.DataFrame) -> None:
     """
-    Renderar fyra KPI-kort överst på statistiksidan.
-    Tar emot det samlade DataFrame från load_all() i helpers.py.
+    Render four KPI cards at the top of the statistics view.
+    Takes the merged DataFrame from load_all() in helpers.py.
     """
     if df.empty:
         st.info("Inga bostäder att visa KPI:er för.")
         return
 
-    # ── Beräkningar med DuckDB ────────────────────────────────────────────────
+    # ── DuckDB aggregations ───────────────────────────────────────────────────
     antal        = len(df)
     snittpris    = duckdb.sql("SELECT ROUND(AVG(pris), -3)::BIGINT FROM df").fetchone()[0]
     snitt_kvm    = duckdb.sql("SELECT ROUND(AVG(boyta), 0)::INT   FROM df").fetchone()[0]

@@ -1,7 +1,8 @@
-# ── vyer/statistik_vy.py ─────────────────────────────────────────────────────
+# Statistics view: KPI cards + tabs with charts for prices, listings and viewings.
+
 import streamlit as st
 from utils.helpers          import load_visningar, read_css
-from utils.constants        import STYLES_PATH
+from utils.constants        import CSS_APP
 from components.kpi_cards   import render_kpis
 from components.filter_bar  import render_filter_bar
 from components.charts      import (
@@ -16,14 +17,14 @@ from components.charts      import (
 
 
 def show() -> None:
-    """Renderar statistiksidan, anropas från app.py."""
-    read_css(STYLES_PATH / "app.css")
+    """Render the statistics view. Called from app.py."""
+    read_css(CSS_APP)
 
     st.markdown("## Statistik")
     st.markdown("Översikt över bostadsmarknaden baserat på insamlad data.")
 
-    # ── Sökfält + filter överst ───────────────────────────────────────────────
-    df, valt_omrade = render_filter_bar()
+    # Search field + filter at the top
+    df, _ = render_filter_bar()
 
     visningar = load_visningar()
 
@@ -33,11 +34,11 @@ def show() -> None:
 
     st.markdown("---")
 
-    # ── KPI-kort ──────────────────────────────────────────────────────────────
+    # KPI cards
     render_kpis(df)
     st.markdown("---")
 
-    # ── Tabs ──────────────────────────────────────────────────────────────────
+    # Tabs
     tab1, tab2, tab3 = st.tabs(["Priser", "Bostäder", "Visningar"])
 
     with tab1:

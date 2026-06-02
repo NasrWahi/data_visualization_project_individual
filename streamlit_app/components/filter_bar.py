@@ -1,21 +1,22 @@
-# ── components/filter_bar.py ──────────────────────────────────────────────────
+# Filter bar component for the search view.
+
 import streamlit as st
 from utils.helpers import load_all, get_omraden
 
 
 def render_filter_bar() -> tuple:
     """
-    Renderar sökfält och filteralternativ — alltid synliga.
-    Sparar filtrerat DataFrame i st.session_state["filtrerat_df"]
-    så att statistiksidan kan läsa samma filter.
+    Render search box and filter options — always visible.
+    Stores the filtered DataFrame in st.session_state["filtrerat_df"]
+    so the statistics view can read the same filter.
 
     Returns:
-        tuple: (filtrerat DataFrame, valt område som sträng)
+        tuple: (filtered DataFrame, selected area as string)
     """
     df      = load_all()
     omraden = get_omraden(df)
 
-    # ── Sök-rad ───────────────────────────────────────────────────────────────
+    # ── Search row ────────────────────────────────────────────────────────────
     col_sok, col_knapp = st.columns([5, 0.8])
 
     with col_sok:
@@ -28,7 +29,7 @@ def render_filter_bar() -> tuple:
     with col_knapp:
         st.button("Sök", use_container_width=True, type="primary", key="btn_sok")
 
-    # ── Filter alltid synligt ─────────────────────────────────────────────────
+    # ── Filter panel — always visible ─────────────────────────────────────────
     with st.container(border=True):
         c1, c2, c3, c4 = st.columns(4)
 
@@ -47,6 +48,7 @@ def render_filter_bar() -> tuple:
             )
 
         with c3:
+            # Adjust price slider range based on selected tenure type
             if "hyra" in upplatelse and "köpa" not in upplatelse:
                 pris_min     = 4_500
                 pris_max_val = 30_000
@@ -76,7 +78,7 @@ def render_filter_bar() -> tuple:
                 key="filter_rum",
             )
 
-    # ── Filtrera DataFrame ────────────────────────────────────────────────────
+    # ── Apply filters ─────────────────────────────────────────────────────────
     if upplatelse:
         df = df[df["upplåtelseform"].isin(upplatelse)]
 
@@ -89,7 +91,7 @@ def render_filter_bar() -> tuple:
     if valt_omrade != "Alla":
         df = df[df["område"] == valt_omrade]
 
-    # ── Spara i session_state så statistik-sidan kan läsa filtret ─────────────
+    # Save in session state so the statistics view can read the same filter
     st.session_state["filtrerat_df"] = df
 
     return df, valt_omrade
