@@ -78,6 +78,11 @@ def load_all() -> pd.DataFrame:
         suffixes=("", "_plats"),
     )
 
+    # For issues in Streamlit
+    # Convert pyarrow string columns to object, so that the DuckDB can read them
+    for col in df.select_dtypes(include="string").columns:
+        df[col] = df[col].astype("object")
+
     return df
 
 
