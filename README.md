@@ -87,8 +87,9 @@ source .venv/Scripts/activate
 
 ## Install dependencies:
 
+Installs the package in editable mode, allowing imports from streamlit_app/
 ```
-uv pip install -e . # Installs the package in editable mode, allowing imports from streamlit_app/
+uv pip install -e .
 ```
 
 And in case of a warning and a certificate error on e.g. Windows:
