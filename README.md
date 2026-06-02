@@ -2,6 +2,8 @@
 
 ## Swedish Housing Market Dashboard
 
+Streamlit dashboard link: https://righthome.streamlit.app/
+
 # Overview
 
 This project implements an interactive housing market dashboard built with Streamlit (also Power BI), designed to help users explore Swedish real estate data across Stockholm, Malmö and Göteborg. Built in collaboration with a UX team (which helped design the user interface for Power BI) as part of a team of Data Engineers. The dashboard combines an ETL pipeline, exploratory data analysis, data storytelling and a fully functional web application with map integration, filtering and personalised user accounts.
