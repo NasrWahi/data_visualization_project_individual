@@ -28,28 +28,37 @@ def read_css(path: Path) -> None:
 
 # ── Data loading ──────────────────────────────────────────────────────────────
 
+# For issues in Streamlit
+# Conversions, DuckDB reads all DF
+def _cast_strings_to_object(df: pd.DataFrame) -> pd.DataFrame:
+    """Convert pyarrow string columns to object, so that the DuckDB can read them."""
+    for col in df.select_dtypes(include="string").columns:
+        df[col] = df[col].astype("object")
+    return df
+
+
 @st.cache_data
 def load_bostader() -> pd.DataFrame:
     """Load bostader.csv."""
-    return pd.read_csv(CSV_BOSTADER)
+    return _cast_strings_to_object(pd.read_csv(CSV_BOSTADER))
 
 
 @st.cache_data
 def load_priser() -> pd.DataFrame:
     """Load priser.csv."""
-    return pd.read_csv(CSV_PRISER)
+    return _cast_strings_to_object(pd.read_csv(CSV_PRISER))
 
 
 @st.cache_data
 def load_platser() -> pd.DataFrame:
     """Load platser.csv."""
-    return pd.read_csv(CSV_PLATSER)
+    return _cast_strings_to_object(pd.read_csv(CSV_PLATSER))
 
 
 @st.cache_data
 def load_visningar() -> pd.DataFrame:
     """Load visningar.csv."""
-    return pd.read_csv(CSV_VISNINGAR)
+    return _cast_strings_to_object(pd.read_csv(CSV_VISNINGAR))
 
 
 @st.cache_data
@@ -77,11 +86,6 @@ def load_all() -> pd.DataFrame:
         how="left",
         suffixes=("", "_plats"),
     )
-
-    # For issues in Streamlit
-    # Convert pyarrow string columns to object, so that the DuckDB can read them
-    for col in df.select_dtypes(include="string").columns:
-        df[col] = df[col].astype("object")
 
     return df
 
