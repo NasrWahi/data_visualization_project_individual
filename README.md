@@ -64,6 +64,9 @@ Some screenshots of the Streamlit dashboard:
 <img src="https://github.com/user-attachments/assets/6c4383a1-daf2-4bb8-a32b-cd9cc7a427c1" width="700"/>
 <img src="https://github.com/user-attachments/assets/136bba0f-35e2-4380-a5a7-f70bf9934208" width="700"/>
 
+<sub>Note: screenshots have been zoomed out slightly to capture the full dashboard view.</sub>
+
+
 Dashboard link: https://righthome.streamlit.app/
 
 ## Data Storytelling
