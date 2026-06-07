@@ -45,6 +45,11 @@ A reproducible flow that generates a synthetic housing dataset and processes it 
 
 The initial visualisation layer was built in Power BI as a foundation for the team's design work. It includes filters for area, listing type and price range, KPIs for average price, listing count and available units, and bar and line charts for market trends. What-if parameters let users adjust budget assumptions and immediately see the effect on affordability across cities. Coding was simultaneously done on Visual Studio Code and Power BI, with Python scripts for data transformation and DAX for measures and other calculated columns.
 
+Pictures of the Power BI dashboard (note: older versions of the visuals, as the design evolved over time):
+
+![Dashboard](https://github.com/user-attachments/assets/3ef53a83-7c6e-482c-91cd-d7d00a5d9ccd)
+![Dashboard 2](https://github.com/user-attachments/assets/9f3e5266-7c51-4f22-836d-edecc7833dbb)
+
 ## Streamlit Dashboard
 
 - **Home view**: Login form with background image and a guest option.
