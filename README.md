@@ -47,8 +47,8 @@ The initial visualisation layer was built in Power BI as a foundation for the te
 
 Pictures of the Power BI dashboard (note: older versions of the visuals, as the design evolved over time):
 
-![Dashboard](https://github.com/user-attachments/assets/3ef53a83-7c6e-482c-91cd-d7d00a5d9ccd)
-![Dashboard 2](https://github.com/user-attachments/assets/9f3e5266-7c51-4f22-836d-edecc7833dbb)
+<img src="https://github.com/user-attachments/assets/3ef53a83-7c6e-482c-91cd-d7d00a5d9ccd" width="700"/>
+<img src="https://github.com/user-attachments/assets/9f3e5266-7c51-4f22-836d-edecc7833dbb" width="700"/>
 
 ## Streamlit Dashboard
 
@@ -57,7 +57,14 @@ Pictures of the Power BI dashboard (note: older versions of the visuals, as the 
 - **Statistics view**: KPI cards followed by tabbed charts for prices, listings and viewings, all powered by DuckDB aggregations against pandas DataFrames.
 - **Simple session-based login**: Users enter only their name to log in. Saved listings are persisted per user in `sparade.csv` and remain available between sessions.
 
-https://righthome.streamlit.app/
+Some screenshots of the Streamlit dashboard:
+
+<img src="https://github.com/user-attachments/assets/b5a8d349-89ff-417a-aed9-56122a5cda54" width="700"/>
+<img src="https://github.com/user-attachments/assets/ca0f0cf2-a794-41bf-b767-078b7a6883cb" width="700"/>
+<img src="https://github.com/user-attachments/assets/6c4383a1-daf2-4bb8-a32b-cd9cc7a427c1" width="700"/>
+<img src="https://github.com/user-attachments/assets/136bba0f-35e2-4380-a5a7-f70bf9934208" width="700"/>
+
+Dashboard link: https://righthome.streamlit.app/
 
 ## Data Storytelling
 
